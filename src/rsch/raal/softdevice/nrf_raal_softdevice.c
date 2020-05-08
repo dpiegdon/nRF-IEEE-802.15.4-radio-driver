@@ -374,7 +374,7 @@ static void timeslot_request(void)
     // Request timeslot from SoftDevice.
     uint32_t err_code = sd_radio_request(&m_request);
 
-    if (err_code != NRF_SUCCESS)
+    if (err_code != NRFX_SUCCESS)
     {
         m_timeslot_state = TIMESLOT_STATE_IDLE;
     }
@@ -710,7 +710,7 @@ void nrf_raal_init(void)
 
     uint32_t err_code = sd_radio_session_open(signal_handler);
 
-    assert(err_code == NRF_SUCCESS);
+    assert(err_code == NRFX_SUCCESS);
     (void)err_code;
 
 #if (SD_VERSION == BLE_ADV_SCHED_CFG_SUPPORT_SD_VERSION)
@@ -725,7 +725,7 @@ void nrf_raal_init(void)
 
         err_code = sd_ble_opt_set(BLE_COMMON_OPT_ADV_SCHED_CFG, &opt);
 
-        assert(err_code == NRF_SUCCESS);
+        assert(err_code == NRFX_SUCCESS);
         (void)err_code;
     }
 #endif
@@ -745,7 +745,7 @@ void nrf_raal_uninit(void)
 
     uint32_t err_code = sd_radio_session_close();
 
-    assert(err_code == NRF_SUCCESS);
+    assert(err_code == NRFX_SUCCESS);
     (void)err_code;
 
     m_continuous     = false;

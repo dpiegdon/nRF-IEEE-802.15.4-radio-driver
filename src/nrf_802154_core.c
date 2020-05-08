@@ -57,7 +57,7 @@
 #include "nrf_802154_types.h"
 #include "nrf_802154_utils.h"
 #include "nrf_egu.h"
-#include "nrf_error.h"
+#include "nrfx_errors.h"
 #include "nrf_ppi.h"
 #include "nrf_radio.h"
 #include "nrf_timer.h"
@@ -810,7 +810,7 @@ static void ppis_for_egu_and_ramp_up_set(nrf_radio_task_t ramp_up_task, bool sel
 /** Configure FEM to set LNA at appropriate time. */
 static void fem_for_lna_set(void)
 {
-    if (nrf_802154_fal_lna_configuration_set(&m_activate_rx_cc0, NULL) == NRF_SUCCESS)
+    if (nrf_802154_fal_lna_configuration_set(&m_activate_rx_cc0, NULL) == NRFX_SUCCESS)
     {
         uint32_t event_addr = (uint32_t)nrf_egu_event_address_get(NRF_802154_SWI_EGU_INSTANCE,
                                                                   EGU_EVENT);
@@ -839,7 +839,7 @@ static void fem_for_lna_reset(void)
 /** Configure FEM to set PA at appropriate time. */
 static void fem_for_pa_set(void)
 {
-    if (nrf_802154_fal_pa_configuration_set(&m_activate_tx_cc0, NULL) == NRF_SUCCESS)
+    if (nrf_802154_fal_pa_configuration_set(&m_activate_tx_cc0, NULL) == NRFX_SUCCESS)
     {
         uint32_t event_addr = (uint32_t)nrf_egu_event_address_get(NRF_802154_SWI_EGU_INSTANCE,
                                                                   EGU_EVENT);
@@ -872,12 +872,12 @@ static void fem_for_tx_set(bool cca)
         bool pa_set  = false;
         bool lna_set = false;
 
-        if (nrf_802154_fal_lna_configuration_set(&m_activate_rx_cc0, &m_ccaidle) == NRF_SUCCESS)
+        if (nrf_802154_fal_lna_configuration_set(&m_activate_rx_cc0, &m_ccaidle) == NRFX_SUCCESS)
         {
             lna_set = true;
         }
 
-        if (nrf_802154_fal_pa_configuration_set(&m_ccaidle, NULL) == NRF_SUCCESS)
+        if (nrf_802154_fal_pa_configuration_set(&m_ccaidle, NULL) == NRFX_SUCCESS)
         {
             pa_set = true;
         }
@@ -887,7 +887,7 @@ static void fem_for_tx_set(bool cca)
     }
     else
     {
-        success = (nrf_802154_fal_pa_configuration_set(&m_activate_tx_cc0, NULL) == NRF_SUCCESS);
+        success = (nrf_802154_fal_pa_configuration_set(&m_activate_tx_cc0, NULL) == NRFX_SUCCESS);
     }
 
     if (success)
@@ -1554,7 +1554,7 @@ static void rx_init(bool disabled_was_triggered)
 
     uint32_t delta_time;
 
-    if (nrf_802154_fal_lna_configuration_set(&m_activate_rx_cc0, NULL) == NRF_SUCCESS)
+    if (nrf_802154_fal_lna_configuration_set(&m_activate_rx_cc0, NULL) == NRFX_SUCCESS)
     {
         delta_time = nrf_timer_cc_read(NRF_802154_TIMER_INSTANCE,
                                        NRF_TIMER_CC_CHANNEL0);

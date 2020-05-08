@@ -60,7 +60,7 @@ void nrf_802154_random_init(void)
     {
         result = sd_rand_application_vector_get((uint8_t *)&m_seed, sizeof(m_seed));
     }
-    while (result != NRF_SUCCESS);
+    while (result != NRFX_SUCCESS);
 #else // RAAL_SOFTDEVICE
     NRF_RNG->TASKS_START = 1;
 

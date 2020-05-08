@@ -38,7 +38,7 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-#include "nrf_error.h"
+#include "nrfx_errors.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -60,8 +60,8 @@ extern "C" {
  *
  * @param[in] p_config Pointer to the interface parameters for the PA/LNA device.
  *
- * @retval   ::NRF_SUCCESS                 PA/LNA control successfully configured.
- * @retval   ::NRF_ERROR_NOT_SUPPORTED     PA/LNA is not available.
+ * @retval   ::NRFX_SUCCESS                PA/LNA control successfully configured.
+ * @retval   ::NRFX_ERROR_NOT_SUPPORTED    PA/LNA is not available.
  *
  */
 int32_t nrf_fem_interface_configuration_set(nrf_fem_interface_config_t const * const p_config);
@@ -75,8 +75,8 @@ int32_t nrf_fem_interface_configuration_set(nrf_fem_interface_config_t const * c
  *
  * @param[in] p_config Pointer to the interface parameters for the PA/LNA device to be populated.
  *
- * @retval   ::NRF_SUCCESS                 PA/LNA control successfully configured.
- * @retval   ::NRF_ERROR_NOT_SUPPORTED     PA/LNA is not available.
+ * @retval   ::NRFX_SUCCESS                PA/LNA control successfully configured.
+ * @retval   ::NRFX_ERROR_NOT_SUPPORTED    PA/LNA is not available.
  *
  */
 int32_t nrf_fem_interface_configuration_get(nrf_fem_interface_config_t * p_config);
@@ -89,13 +89,13 @@ static inline int32_t nrf_fem_interface_configuration_set(
     nrf_fem_interface_config_t const * const p_config)
 {
     (void)p_config;
-    return NRF_ERROR_NOT_SUPPORTED;
+    return NRFX_ERROR_NOT_SUPPORTED;
 }
 
 static inline int32_t nrf_fem_interface_configuration_get(nrf_fem_interface_config_t * p_config)
 {
     (void)p_config;
-    return NRF_ERROR_NOT_SUPPORTED;
+    return NRFX_ERROR_NOT_SUPPORTED;
 }
 
 #endif // ENABLE_FEM

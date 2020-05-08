@@ -196,7 +196,7 @@ static void verify_receive_begin_setup(uint32_t shorts)
 
     nrf_timer_shorts_enable_Expect(NRF_802154_TIMER_INSTANCE,
                                    NRF_TIMER_SHORT_COMPARE0_STOP_MASK);
-    nrf_802154_fal_lna_configuration_set_ExpectAndReturn(&m_activate_rx_cc0, NULL, NRF_SUCCESS);
+    nrf_802154_fal_lna_configuration_set_ExpectAndReturn(&m_activate_rx_cc0, NULL, NRFX_SUCCESS);
     nrf_timer_cc_read_ExpectAndReturn(NRF_802154_TIMER_INSTANCE, NRF_TIMER_CC_CHANNEL0, delta_time);
     nrf_timer_cc_write_Expect(NRF_802154_TIMER_INSTANCE, NRF_TIMER_CC_CHANNEL1, delta_time + ACK_IFS - TXRU_TIME - EVENT_LAT);
 
@@ -300,8 +300,8 @@ static void verify_complete_ack_is_not_matched(void)
 
 static void verify_clearing_fem_config(void)
 {
-    nrf_802154_fal_lna_configuration_clear_ExpectAndReturn(NULL, &m_deactivate_on_disable, NRF_SUCCESS);
-    nrf_802154_fal_lna_configuration_clear_ExpectAndReturn(NULL, &m_deactivate_on_disable, NRF_SUCCESS);
+    nrf_802154_fal_lna_configuration_clear_ExpectAndReturn(NULL, &m_deactivate_on_disable, NRFX_SUCCESS);
+    nrf_802154_fal_lna_configuration_clear_ExpectAndReturn(NULL, &m_deactivate_on_disable, NRFX_SUCCESS);
 }
 
 void setUp(void)
@@ -400,12 +400,12 @@ static void verify_transmit_begin_periph_setup(bool cca)
     // Set timer and PPIs for FEM
     if (cca)
     {
-        nrf_802154_fal_lna_configuration_set_ExpectAndReturn(&m_activate_rx_cc0, &m_ccaidle, NRF_SUCCESS);
-        nrf_802154_fal_pa_configuration_set_ExpectAndReturn(&m_ccaidle, NULL, NRF_SUCCESS);
+        nrf_802154_fal_lna_configuration_set_ExpectAndReturn(&m_activate_rx_cc0, &m_ccaidle, NRFX_SUCCESS);
+        nrf_802154_fal_pa_configuration_set_ExpectAndReturn(&m_ccaidle, NULL, NRFX_SUCCESS);
     }
     else
     {
-        nrf_802154_fal_pa_configuration_set_ExpectAndReturn(&m_activate_tx_cc0, NULL, NRF_SUCCESS);
+        nrf_802154_fal_pa_configuration_set_ExpectAndReturn(&m_activate_tx_cc0, NULL, NRFX_SUCCESS);
     }
 
     task_addr1 = rand();
@@ -463,7 +463,7 @@ void test_transmit_begin_ShallPrepareHardwareToTransmit(void)
     task_addr1 = rand();
     event_addr = rand();
 
-    nrf_802154_fal_pa_configuration_set_ExpectAndReturn(&m_activate_tx_cc0, NULL, NRF_SUCCESS);
+    nrf_802154_fal_pa_configuration_set_ExpectAndReturn(&m_activate_tx_cc0, NULL, NRFX_SUCCESS);
     nrf_timer_shorts_enable_Expect(NRF_802154_TIMER_INSTANCE, NRF_TIMER_SHORT_COMPARE0_STOP_MASK);
 
     nrf_egu_event_address_get_ExpectAndReturn(NRF_802154_SWI_EGU_INSTANCE, EGU_EVENT, (uint32_t *)event_addr);
@@ -565,7 +565,7 @@ static void verify_tx_terminate_periph_reset(bool in_timeslot)
                              NRF_TIMER_SHORT_COMPARE0_STOP_MASK |
                              NRF_TIMER_SHORT_COMPARE1_STOP_MASK);
 
-    nrf_802154_fal_pa_configuration_clear_ExpectAndReturn(&m_activate_tx_cc0, NULL, NRF_SUCCESS);
+    nrf_802154_fal_pa_configuration_clear_ExpectAndReturn(&m_activate_tx_cc0, NULL, NRFX_SUCCESS);
 
     nrf_timer_task_trigger_Expect(NRF_802154_TIMER_INSTANCE, NRF_TIMER_TASK_SHUTDOWN);
     nrf_ppi_channel_disable_Expect(PPI_EGU_TIMER_START);
@@ -655,11 +655,11 @@ static void verify_phyend_ack_req_periph_setup(uint32_t shorts, bool buffer_free
                              NRF_TIMER_SHORT_COMPARE0_STOP_MASK |
                              NRF_TIMER_SHORT_COMPARE1_STOP_MASK);
 
-    nrf_802154_fal_pa_configuration_clear_ExpectAndReturn(&m_activate_tx_cc0, NULL, NRF_SUCCESS);
+    nrf_802154_fal_pa_configuration_clear_ExpectAndReturn(&m_activate_tx_cc0, NULL, NRFX_SUCCESS);
     nrf_timer_task_trigger_Expect(NRF_802154_TIMER_INSTANCE, NRF_TIMER_TASK_SHUTDOWN);
 
     // Set PPIs necessary in rx_ack state
-    nrf_802154_fal_lna_configuration_set_ExpectAndReturn(&m_activate_rx_cc0, NULL, NRF_SUCCESS);
+    nrf_802154_fal_lna_configuration_set_ExpectAndReturn(&m_activate_rx_cc0, NULL, NRFX_SUCCESS);
 
     event_addr = rand();
     task_addr1 = rand();
@@ -867,7 +867,7 @@ static void verify_rx_ack_terminate_hardware_reset(bool in_timeslot)
     nrf_ppi_channel_disable_Expect(PPI_DISABLED_EGU);
     nrf_ppi_channel_disable_Expect(PPI_EGU_RAMP_UP);
 
-    nrf_802154_fal_lna_configuration_clear_ExpectAndReturn(&m_activate_rx_cc0, NULL, NRF_SUCCESS);
+    nrf_802154_fal_lna_configuration_clear_ExpectAndReturn(&m_activate_rx_cc0, NULL, NRFX_SUCCESS);
     nrf_timer_task_trigger_Expect(NRF_802154_TIMER_INSTANCE, NRF_TIMER_TASK_SHUTDOWN);
     nrf_timer_shorts_disable_Expect(NRF_802154_TIMER_INSTANCE, NRF_TIMER_SHORT_COMPARE0_STOP_MASK);
 
