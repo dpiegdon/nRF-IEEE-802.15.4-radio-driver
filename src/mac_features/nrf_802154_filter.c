@@ -340,6 +340,7 @@ static bool dst_pan_id_check(const uint8_t * p_panid, uint8_t frame_type)
  */
 static bool dst_short_addr_check(const uint8_t * p_dst_addr, uint8_t frame_type)
 {
+    (void)frame_type;
     bool result;
 
     if ((0 == memcmp(p_dst_addr, nrf_802154_pib_short_address_get(), SHORT_ADDRESS_SIZE)) ||
@@ -366,6 +367,7 @@ static bool dst_short_addr_check(const uint8_t * p_dst_addr, uint8_t frame_type)
  */
 static bool dst_extended_addr_check(const uint8_t * p_dst_addr, uint8_t frame_type)
 {
+    (void)frame_type;
     bool result;
 
     if (0 == memcmp(p_dst_addr, nrf_802154_pib_extended_address_get(), EXTENDED_ADDRESS_SIZE))

@@ -102,6 +102,7 @@ static void fcf_sequence_number_suppression_set(const uint8_t * p_frame)
 
 static void fcf_ie_present_set(const uint8_t * p_frame, const uint8_t * p_ie_data)
 {
+    (void)p_frame;
     if (p_ie_data != NULL)
     {
         m_ack_data[IE_PRESENT_OFFSET] |= IE_PRESENT_BIT;
@@ -126,6 +127,7 @@ static void fcf_dst_addressing_mode_set(const uint8_t * p_frame)
 
 static void fcf_src_addressing_mode_set(const uint8_t * p_frame)
 {
+    (void)p_frame;
     m_ack_data[SRC_ADDR_TYPE_OFFSET] |= SRC_ADDR_TYPE_NONE;
 }
 
@@ -197,6 +199,7 @@ static void destination_set(const nrf_802154_frame_parser_mhr_data_t * p_frame,
 
 static void source_set(const uint8_t * p_frame)
 {
+    (void)p_frame;
     // Intentionally empty: source address type is None.
 }
 
